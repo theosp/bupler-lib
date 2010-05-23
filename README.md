@@ -11,7 +11,7 @@ You can view the documentation online on: http://www.bupler.com/ .
 
 Or generate local HTML version of bupler's documentation:
 
-    $ easy_install -U Sphinx # easy_install comes with the python-setuptools package
+    $ sudo easy_install -U Sphinx # easy_install comes with the python-setuptools package
     $ cd docs
     $ make html
 
