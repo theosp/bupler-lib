@@ -1,9 +1,11 @@
 bupler
 ======
 
-Generating the documentation:
------------------------------
+Obtaining Bupler's Documentation:
+---------------------------------
 Bupler uses [Sphinx][SphinxHP] for its documentation.
+
+Raw documentation files available under: docs/source (.rst files)
 
 You can view the documentation online on: http://www.bupler.com/ .
 
