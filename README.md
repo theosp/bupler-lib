@@ -9,6 +9,7 @@ You can view the documentation online on: http://www.bupler.com/ .
 
 Or generate local HTML version of bupler's documentation:
 
+    $ easy_install -U Sphinx
     $ cd docs
     $ make html
 
