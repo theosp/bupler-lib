@@ -1,0 +1,19 @@
+#!/bin/bash
+
+script.path ()
+{
+    # credit: http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-in/179231#179231
+    SCRIPT_PWD="${BASH_SOURCE[1]}";
+    if([ -h "${SCRIPT_PWD}" ]) then
+        while([ -h "${SCRIPT_PWD}" ]) do SCRIPT_PWD=`readlink "${SCRIPT_PWD}"`; done
+    fi
+
+    pushd . > /dev/null
+    cd `dirname ${SCRIPT_PWD}` > /dev/null
+    SCRIPT_PWD=`pwd`;
+    popd > /dev/null
+
+    echo $SCRIPT_PWD
+
+    return 0
+}
