@@ -1,11 +1,10 @@
 #!/bin/bash
 
-# This script loads the bupler.import function with which all bupler's modules
-# can be load.
+# This is Bupler's init script.
 
 if [[ -z "$BUPLER_LIB_PATH" ]]
 then
-    # on the installation process we change |BUPLER_LIB_PATH|
+    # During Bupler's setup we replace |BUPLER_LIB_PATH| with the actual path
     BUPLER_LIB_PATH="|BUPLER_LIB_PATH|" 
 fi
 
