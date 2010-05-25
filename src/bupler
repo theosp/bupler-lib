@@ -3,11 +3,15 @@
 # This script loads the bupler.import function with which all bupler's modules
 # can be load.
 
-BUPLER_FUNCTIONS_PATH="/home/osp/www/bupler/src/bupler_functions/"
+if [[ -z "$BUPLER_LIB_PATH" ]]
+then
+    # on the installation process we change |BUPLER_LIB_PATH|
+    BUPLER_LIB_PATH="|BUPLER_LIB_PATH|" 
+fi
 
 bupler.import ()
 {
     module="$1"
 
-    . $BUPLER_FUNCTIONS_PATH"${1//./\/}"
+    . $BUPLER_LIB_PATH"${1//./\/}"
 }
