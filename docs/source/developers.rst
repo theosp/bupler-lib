@@ -4,9 +4,6 @@ Developing Bupler
 The intended audience of this document is the developers who wish to extend the
 bupler library or improve its structure.
 
-Good BASH Resources
--------------------
-
 Design
 ------
 
@@ -30,3 +27,6 @@ Conventions
 -----------
 
 * Modules should have short, all-lowercase names.  Underscores can be used in the module name if it improves readability.
+
+Good BASH Resources
+-------------------
