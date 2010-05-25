@@ -1,0 +1,75 @@
+#!/bin/bash
+
+array.list ()
+{
+    eval \
+        "for i in \"\${$1[@]}\"
+        do
+            echo -n \"\\\"\$i\\\"\"\" \"
+        done"
+
+    return 0
+}
+
+array.len ()
+{
+    eval 'echo ${#'$1'[@]}'
+
+    return 0
+}
+
+array.push ()
+{
+    local new_elements=( "${@:2}" )
+
+    eval $1'+=('$(array.list new_elements)')'
+
+    return 0
+}
+
+array.pop ()
+{
+    if (( $(array.len $1) > 0 ))
+    then
+        eval 'unset '$1'[${#'$1'[@]}-1]'
+    fi
+
+    return 0
+}
+
+array.in_array ()
+{
+    local array
+
+    eval 'array=( '"$( array.list $1 )"' )'
+
+    for i in "${array[@]}"
+    do
+        if [[ "$i" = "$2" ]]
+        then
+            return 0
+        fi
+    done
+
+    return 1
+}
+
+array.diff ()
+{
+    local result_array array1 array2
+
+    eval 'array1=( '"$( array.list $1 )"' )'
+    eval 'array2=( '"$( array.list $2 )"' )'
+
+    for i in "${array1[@]}"
+    do
+        if ! (array.in_array array2 "$i")
+        then
+            array.push result_array "$i"
+        fi
+    done
+
+    array.list result_array
+
+    return 0
+}
