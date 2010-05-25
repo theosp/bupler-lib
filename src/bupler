@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# This script loads the bupler.import function with which all bupler's modules
+# can be load.
+
+BUPLER_FUNCTIONS_PATH="/home/osp/www/bupler/src/bupler_functions/"
+
+bupler.import ()
+{
+    module="$1"
+
+    . $BUPLER_FUNCTIONS_PATH"${1//./\/}"
+}
