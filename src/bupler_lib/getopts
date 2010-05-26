@@ -1,0 +1,10 @@
+#!/bin/bash
+
+getopts. ()
+{
+    # getopts pattern selected_flags_array selected_flags_values_array 
+    # Gets getopts pattern and the names of two array to which the 
+    pattern="$1"
+    selected_flags_array="$2"
+    selected_flags_values_array="$3"
+}

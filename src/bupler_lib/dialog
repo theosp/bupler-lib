@@ -1,0 +1,6 @@
+#!/bin/bash
+
+function dialog.choice ()
+{
+    # Get letters and prompt the user to choose one between them
+}
