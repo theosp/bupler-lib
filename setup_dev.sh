@@ -15,7 +15,7 @@ reinstall Bupler.
 
 EOF
 
-# load some parts of Bupler's lib that are helpful for this script.
+# Load some parts of Bupler's lib that are helpful for this script.
 BUPLER_LIB_PATH="src/bupler_lib/"
 . src/bupler
 bupler.import script
