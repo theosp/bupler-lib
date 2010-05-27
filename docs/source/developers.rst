@@ -30,3 +30,8 @@ Conventions
 
 Good BASH Resources
 -------------------
+
+* http://mywiki.wooledge.org/
+* POSIX: http://www.opengroup.org/onlinepubs/9699919799/utilities/contents.html
+* http://www.bash-hackers.org/wiki/doku.php
+* Coreutils FAQ: http://www.gnu.org/software/coreutils/faq/coreutils-faq.html
