@@ -1,0 +1,55 @@
+#!/bin/bash
+
+object.doc()
+{
+    cat <<EOF
+The base object
+
+This module provide object.Object class that defines the basic methods for the
+general Bupler object.
+
+EOF
+}
+
+object.Object()
+{
+    local name="$1"
+
+    # Determine the object's type in accordance with the calling function
+    if [[ "${FUNCNAME[1]}" = "main" ]]
+    then
+        # called outside of a any function
+        type='Object';
+    elif [[ "${FUNCNAME[1]}" = "bupler.import" ]]
+    then
+        # if called by bupler.import this is a module
+        type='Module';
+    else
+        type="${FUNCNAME[1]#*.}";
+    fi
+
+    eval "$(cat <<EOF
+        $name.__type__ ()
+        {
+            echo '$type'
+            return 0
+        }
+
+        $name.set_attr ()
+        {
+            attr_name="\$1"
+            attr_value="\$2"
+            # IEOF stands for Inner End Of File
+            eval "$(cat <<IEOF
+                $name.\$attr_name ()
+                {
+                    echo "\$attr_value"
+                }
+IEOF
+            )"
+             
+            return 0
+        }
+EOF
+    )"
+}
