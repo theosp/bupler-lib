@@ -1,0 +1,110 @@
+#!/bin/bash
+
+dict.Dict ()
+{
+    name="$1"
+    dict_array="bupler_dict_${name//./_d_}"
+
+    shift
+
+    bupler.import object
+    object.Object "$name"
+
+    eval "$(cat <<EOF
+        $name._get_key_id ()
+        {
+            local key="\$1"
+            local array_indexes=("\${!$dict_array[@]}")
+
+            local i
+            for ((i=0; i < \${#$dict_array[@]}; i+=2))
+            do
+                local current_index="\${array_indexes[\$i]}"
+                if [[ "\$key" = "\${$dict_array[\$current_index]}" ]]
+                then
+                    echo -n "\$i"
+                    return 0
+                fi
+            done
+
+            return 1
+        }
+
+        $name.len ()
+        {
+            echo -n "\$(( \${#$dict_array[@]} / 2 ))"
+
+            return 0
+        }
+
+        $name.has_key ()
+        {
+            local key="\$1"
+            local key_id
+
+            if key_id="\$($name._get_key_id "\$key")"
+            then
+                return 0
+            fi
+
+            return 1
+        }
+
+        $name.set ()
+        {
+            local i
+            for ((i=1; i <= \${#@}; i+=2))
+            do
+                local key="\${!i}"
+                local value_pos_param_id=\$((\$i + 1))
+                local value="\${!value_pos_param_id}"
+
+                if key_id="\$($name._get_key_id "\$key")"
+                then
+                    # If this key already set
+                    $dict_array["\$(( \$key_id + 1 ))"]="\$value"
+                else
+                    $dict_array+=( "\$key" "\$value" )
+                fi
+            done
+
+            return 0
+        }
+
+        $name.get ()
+        {
+            local key="\$1"
+
+            if key_id="\$($name._get_key_id "\$key")"
+            then
+                echo -n "\${$dict_array["\$(( \$key_id + 1 ))"]}"
+                return 0
+            fi
+
+            return 1
+        }
+
+        $name.del ()
+        {
+            local key key_id exit_status
+
+            exit_status=0
+
+            for key in "\$@"
+            do
+                if key_id="\$($name._get_key_id "\$key")"
+                then
+                    unset "$dict_array[\$key_id]"
+                    unset "$dict_array[\$((\$key_id + 1))]"
+                    $dict_array=( "\${$dict_array[@]}" )
+
+                else
+                    exit_status=1
+                fi
+            done
+
+            return \$exit_status
+        }
+EOF
+    )"
+}

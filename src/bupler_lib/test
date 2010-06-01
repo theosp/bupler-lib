@@ -1,0 +1,172 @@
+#!/bin/bash
+
+bupler.import string
+
+test._ok ()
+{
+    echo '[OK]'
+    return 0
+}
+
+test._error_message ()
+{
+    # test._error_message(code,expected_result,result)
+    local test_type="${FUNCNAME[1]}"
+    local code="$1"
+    local expected_result="$2"
+    local result="$3"
+
+    string.String message_title "Error $test_type"
+    string.String message_title_underscore "="
+    message_title_underscore="$(message_title_underscore.repeat $(message_title.len))"
+
+    cat <<EOF
+$message_title
+$message_title_underscore
+
+Code
+----
+
+$code
+
+Expected Result
+---------------
+
+$expected_result
+
+Actual Result
+-------------
+
+$result
+
+EOF
+
+    return 0
+}
+
+test.exit_status ()
+{
+    # test.exit_status(code_to_test, expected_exit_status)
+    #
+    # exit_status: 0 if passed, 1 otherwise
+
+    local code_to_test="$1"
+    local expected_exit_status="$2"
+
+    eval "$code_to_test" &> /dev/null
+
+    local exit_status="$?"
+
+    if [[ "$exit_status" = "$expected_exit_status" ]]
+    then
+        test._ok
+        return 0
+    fi
+
+    test._error_message "$code_to_test" "$expected_exit_status" "$exit_status"
+
+    return 1
+}
+
+test.true ()
+{
+    # test.true(code_to_test)
+    #
+    # exit_status: 0 if passed, 1 otherwise
+
+    local code_to_test="$1"
+
+    eval "$code_to_test" &> /dev/null
+    local exit_status="$?"
+
+    if [[ "$exit_status" = 0 ]]
+    then
+        test._ok
+        return 0
+    fi
+
+    test._error_message "$code_to_test" "0" "$exit_status"
+
+    return 1
+}
+
+test.false ()
+{
+    # test.false(code_to_test)
+    #
+    # exit_status: 0 if passed, 1 otherwise
+    local code_to_test="$1"
+
+    eval "$code_to_test" &> /dev/null
+    local exit_status="$?"
+
+    if [[ "$exit_status" != 0 ]]
+    then
+        test._ok
+        return 0
+    fi
+
+    test._error_message "$code_to_test" "Everything but 0" "$exit_status"
+
+    return 1
+}
+
+test.stdout ()
+{
+    # test.stdout(code_to_test, expected_stdout)
+    #
+    # exit_status: 0 if passed, 1 otherwise
+    local code_to_test="$1"
+    local expected_stdout="$2"
+
+    local actual_stdout="$(eval "$code_to_test"; echo x)"
+    actual_stdout=${actual_stdout%x}
+
+    if [[ "$expected_stdout" = "$actual_stdout" ]]
+    then
+        test._ok
+        return 0
+    fi
+
+    test._error_message "$code_to_test" "${expected_stdout}" "${actual_stdout}"
+
+    return 1
+}
+
+test.equal ()
+{
+    for i in "$@"
+    do
+        if [[ "$1" != "$i" ]]
+        then
+            echo "[Failed] test.equal failed for:" "$@"
+            return 1
+        fi
+    done
+
+    test._ok
+    return 0
+}
+
+test.not_equal ()
+{
+    local i
+
+    for ((i=1; i <= $#; i++))
+    do
+        for ((j=1; j <= $#; j++))
+        do
+            if (( $i != $j ))
+            then
+                if [[ "${!i}" = "${!j}" ]]
+                then
+                    echo "[Failed] test.not_equal failed, found \"${!i}\" twice"
+                    return 1
+                fi
+            fi
+        done
+    done
+
+    test._ok
+    return 0
+}

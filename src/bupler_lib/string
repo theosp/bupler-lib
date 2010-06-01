@@ -1,0 +1,72 @@
+#!/bin/bash
+
+string.doc()
+{
+    cat <<EOF
+Common String Operations
+
+The string module provides functions for strings, as well as String, a class
+that implements those functions as methods.
+EOF
+}
+
+string.len.doc ()
+{
+    cat <<EOF
+string.len(string)
+
+Prints the length of string
+Note: string should be the actual string not a var name.
+
+Exit status: always 0
+EOF
+}
+string.len ()
+{
+    string="$1"
+    echo 
+}
+
+string.String.doc ()
+{
+    cat <<EOF
+EOF
+}
+string.String ()
+{
+    local name="$1"
+    local init_value="$2"
+
+    bupler.import object
+    object.Object "$name"
+
+    eval "$(cat <<EOF
+        $name="$init_value"
+
+        $name.len ()
+        {
+            # String.len()
+            # Prints current length
+
+            echo \${#$name}
+
+            return 0
+        }
+
+        $name.repeat ()
+        {
+            # String.repeat(times)
+            # Prints string $times times
+
+            local times="\$1"
+            local i
+            for ((i=1; i <= \$times; i++))
+            do
+                echo -n \$$name
+            done
+
+            return 0
+        }
+EOF
+    )"
+}

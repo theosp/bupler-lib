@@ -1,0 +1,39 @@
+#!/bin/bash
+
+file.replace.doc ()
+{
+    cat <<EOF
+file.replace(file, pattern, replacement)
+
+Replaces all occurrences of pattern in file with replacement.
+
+Pattern is BRE (Basic Regular Expression) pattern.
+
+Exit status:
+returns 0 unless pattern matches empty string, which is for example the case
+for pattern='^'. 
+
+This will be fixed in future releases.
+
+(This is caused because the ed's s command fails for empty matches when the g
+flag is set for it)
+
+EOF
+    return 0
+}
+
+file.replace ()
+{
+    file="$1"
+    pattern="$2"
+    replacement="$3"
+
+    # escape /
+    pattern=${pattern//\//\\\/}
+    replacement=${replacement//\//\\\/}
+
+    ed -s "$file" 2>/dev/null <<EOF
+        g/$pattern/s//$replacement/g
+        w
+EOF
+}
