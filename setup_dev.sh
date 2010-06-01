@@ -34,5 +34,21 @@ path=$(script.path) # This script path
 
 . setup_settings
 
+if [[ ( -e "$DEFAULT_BUPLER_INIT_PATH" || -L "$DEFAULT_BUPLER_INIT_PATH" ) || ( -e "$DEFAULT_BUPLER_INIT_PATH" || -L "$DEFAULT_BUPLER_INIT_PATH" ) ]]
+then
+    cat <<EOF
+$DEFAULT_BUPLER_INIT_PATH or $DEFAULT_BUPLER_LIB_PATH already exist do you want
+to replace them?
+EOF
+    read -n1 ans
+    if [[ "$ans" = [yY] ]]
+    then
+        rm -rf "$DEFAULT_BUPLER_INIT_PATH"
+        rm -rf "$DEFAULT_BUPLER_LIB_PATH"
+    else
+        exit 1
+    fi
+fi
+
 ln -s "${path}/src/bupler" "$DEFAULT_BUPLER_INIT_PATH"
 ln -s "${path}/src/bupler_lib" "$DEFAULT_BUPLER_LIB_PATH"
