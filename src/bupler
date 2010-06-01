@@ -12,5 +12,13 @@ bupler.import ()
 {
     module="$1"
 
-    . $BUPLER_LIB_PATH"${1//./\/}"
+    if [[ "$(bupler.type "$module")" != 'Module' ]]
+    then
+        . $BUPLER_LIB_PATH"${module//./\/}"
+
+        object.Object "$module"
+    fi
 }
+
+# import the object module, which is required by bupler.import()
+bupler.import object
