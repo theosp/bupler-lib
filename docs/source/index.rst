@@ -1,13 +1,7 @@
 The Bupler Project
 ==================
 
-Contents:
-
-.. toctree::
-   :maxdepth: 2
-
-   modules
-   developers
+Add some words about Bupler here.
 
 Indices and tables
 ==================
