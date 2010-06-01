@@ -8,6 +8,23 @@ then
     BUPLER_LIB_PATH="|BUPLER_LIB_PATH|" 
 fi
 
+bupler.type ()
+{
+    name="$1"
+
+    type_function="$name"'.__type__'
+
+    # The following exit status is 0 if $type_function isn't set
+    if declare -f "$type_function" &> /dev/null
+    then
+        eval $1'.__type__'
+        return 0
+    fi
+    echo 'unknown yet (soon to be develop)'
+
+    return 0
+}
+
 bupler.import ()
 {
     module="$1"
