@@ -15,6 +15,16 @@ reinstall Bupler.
 
 EOF
 
+echo -n "are you sure you want to continue? [y/N] "
+read -n1 ans
+if [[ "$ans" = [nN] ]]
+then
+    echo
+    exit 1
+fi
+# add empty line
+echo $'\n'
+
 # load some parts of Bupler's lib that are helpful for this script.
 BUPLER_LIB_PATH="src/bupler_lib/"
 . src/bupler
