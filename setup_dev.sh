@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cat <<EOF
-You are about to install the Bupler's lib for development purpose.
+You are about to install the Bupler lib for development purpose.
 
 If you just want to install Bupler and get rid of this directory this isn't the
 right Bupler setup for you, use setup.sh.
