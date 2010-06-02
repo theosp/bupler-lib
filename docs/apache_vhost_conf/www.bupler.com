@@ -4,7 +4,7 @@
 	ServerAlias bupler.com
 	ServerSignature Off
 	
-	DocumentRoot /var/www/bupler/docs/build/html/
+	DocumentRoot /var/www/bupler-lib/docs/build/html/
 
 	<Directory />
 		Options FollowSymLinks
