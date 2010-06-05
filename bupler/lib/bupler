@@ -1,0 +1,84 @@
+#!/bin/bash
+
+bupler.doc ()
+{
+    cat <<EOF
+Bupler's basic module
+EOF
+}
+
+bupler.type.doc()
+{
+    cat <<EOF
+bupler.type(name)
+
+Prints the type of name.
+EOF
+}
+
+bupler.type ()
+{
+    name="$1"
+
+    type_function="$name"'.__type__'
+
+    # The following exit status is 0 if $type_function isn't set
+    if declare -f "$type_function" &> /dev/null
+    then
+        eval $1'.__type__'
+        return 0
+    fi
+    echo 'unknown yet (soon to be develop)'
+
+    return 0
+}
+
+bupler.import.doc()
+{
+    cat <<EOF
+bupler.import(module_name)
+
+loads module_name.
+
+modules as objects
+------------------
+
+For each module it imports bupler.import() calls::
+
+    $ object.Object module_name
+
+so modules can be considered to be objects.
+
+Thus, you can, for example, do the following::
+
+    $ bupler.import module_name
+    $ module_name.set_attr attr value # set new attribute named 'attr' with
+                                      # 'value' as its value.
+    $ module_name.attr
+    value
+
+TODO
+----
+
+should return 1 if module_name doesn't exists.
+
+Exit Status
+-----------
+
+Always 0
+EOF
+}
+bupler.import ()
+{
+    module="$1"
+
+    if [[ "$(bupler.type "$module")" != 'Module' ]]
+    then
+        . $BUPLER_LIB_PATH"${module//./\/}"
+
+        object.Object "$module"
+    fi
+}
+
+# import the object module, which is required by bupler.import()
+bupler.import object
