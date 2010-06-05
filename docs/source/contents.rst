@@ -7,4 +7,3 @@ Contents
    index
    modules
    developers
-   versioning
