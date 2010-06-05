@@ -1,5 +1,6 @@
-BUPLER_LIB_PATH="../src/bupler_lib/"
-. ../src/bupler
+#!/bin/bash
+
+. ../modules/bupler
 
 bupler.import string 
 bupler.import test

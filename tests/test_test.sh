@@ -1,5 +1,7 @@
-BUPLER_LIB_PATH="../src/bupler_lib/"
-. ../src/bupler
+#!/bin/bash
+
+. ../modules/bupler
+
 bupler.import test
 
 test.true $'test.true \'true\''
