@@ -148,3 +148,8 @@ bupler.import ()
 
 # import the object module, which is required by bupler.import()
 bupler.import object
+
+# make this module an object
+# note: no other module needs this, see "modules as objects" in the docs for
+# bupler.import
+object.Object bupler 
