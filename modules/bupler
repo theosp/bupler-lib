@@ -75,9 +75,13 @@ bupler.type.doc()
 bupler.type(name)
 
 Prints the type of name.
+
+Exit Status
+-----------
+
+Always 0
 EOF
 }
-
 bupler.type ()
 {
     name="$1"
