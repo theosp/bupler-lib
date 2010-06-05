@@ -29,8 +29,8 @@ Conventions
 * Modules should have short, all-lowercase names.  Underscores can be used in the module name if it improves readability.
 
 
-Bupler's Terminology and Structure:
-===================
+Bupler's Terminology and Structure
+==================================
 
 Modules:
 --------
@@ -100,10 +100,10 @@ Classes:
 
 * class names should be CamelCased.
 * As with functions modules should be prefixed with the module name and a
-dot.
+  dot.
 
-Bupler's Documentation Conventions:
-=================================
+Bupler's Documentation Conventions
+==================================
 
 Modules:
 --------

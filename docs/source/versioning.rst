@@ -1,5 +1,5 @@
 Bupler's Distribution Structure and Setup Script
-============================================
+================================================
 
 Versioning and Backward Compatibility - Principles
 --------------------------------------------------
