@@ -55,6 +55,20 @@ bupler.script_pwd ()
 
     return 0
 }
+
+# bupler.core_modules_path should have been set as an attribute, but
+# bupler.set_attr isn't available yet.
+# It prints the output of bupler.script_pwd for this script.
+# We declare this function with eval to be able to call bupler.script_pwd
+# only once when defining it.
+eval "$(cat <<EOF
+    bupler.core_modules_path ()
+    {
+        echo -n "$(bupler.script_pwd 1)"
+    }
+EOF
+)"
+
 bupler.type.doc()
 {
     cat <<EOF
