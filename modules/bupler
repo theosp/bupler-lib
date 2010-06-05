@@ -7,6 +7,54 @@ Bupler's basic module
 EOF
 }
 
+bupler.script_pwd.doc ()
+{
+    cat <<EOF
+bupler.script_pwd(physical=0)
+
+Prints the full path of the directory of the script that calls it.
+
+If physical set to 1 it prints the physical dir path.
+
+Exit Status
+-----------
+
+Always 0
+EOF
+}
+bupler.script_pwd ()
+{
+    # credit: http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-in/179231#179231
+    local physical=0
+    if [[ -n "$1" ]] && (( $1 == 1 ))
+    then
+        physical=1
+    fi
+
+    local SCRIPT_PWD="${BASH_SOURCE[1]}"
+    if [ -h "${SCRIPT_PWD}" ] 
+    then
+        while [ -h "${SCRIPT_PWD}" ]
+        do
+            SCRIPT_PWD=`readlink "${SCRIPT_PWD}"`
+        done
+    fi
+
+    pushd . > /dev/null
+    cd `dirname ${SCRIPT_PWD}` > /dev/null
+    if (( $physical == 1 ))
+    then
+        # print physical path
+        SCRIPT_PWD=`pwd -P`
+    else
+        SCRIPT_PWD=`pwd`
+    fi
+    popd > /dev/null
+
+    echo -n $SCRIPT_PWD
+
+    return 0
+}
 bupler.type.doc()
 {
     cat <<EOF
