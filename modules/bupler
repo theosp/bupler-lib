@@ -140,7 +140,7 @@ bupler.import ()
 
     if [[ "$(bupler.type "$module")" != 'Module' ]]
     then
-        . $BUPLER_LIB_PATH"${module//./\/}"
+        . "$(bupler.core_modules_path)/${module//./\/}"
 
         object.Object "$module"
     fi
