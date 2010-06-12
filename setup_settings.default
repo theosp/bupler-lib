@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# IMPORTANT: Do not change this file.
+#     $ cp setup_settings.default setup_settings 
+# To customise the setup settings copy this file to "setup_settings" and work
+# on it instead.
+
+# The directory to which the contents of the modules directory will be copied.
+LIB_PATH="/usr/local/share/bupler"
+# To avoid the need to give the full path to the bupler module each time you
+# want to source it, we create symbolic link to it from a directory that is
+# usually on the environment's $PATH .
+# So all you'll need to do is just::
+#     $ . bupler
+BUPLER_MODULE_SYMLINK_DIR="/usr/local/bn"
