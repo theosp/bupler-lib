@@ -12,4 +12,4 @@ LIB_PATH="/usr/local/share/bupler"
 # usually on the environment's $PATH .
 # So all you'll need to do is just::
 #     $ . bupler
-BUPLER_MODULE_SYMLINK_DIR="/usr/local/bn"
+BUPLER_MODULE_SYMLINK_DIR="/usr/local/bin"
