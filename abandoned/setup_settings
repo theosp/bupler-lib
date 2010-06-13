@@ -1,4 +1,0 @@
-#!/bin/bash
-
-BUPLER_INIT_PATH='/usr/local/bin/bupler'
-BUPLER_LIB_PATH='/usr/local/share/bupler'
