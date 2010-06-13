@@ -1,8 +1,16 @@
-bupler
-======
+The Bupler Lib
+==============
 
-Obtaining Bupler's Documentation:
----------------------------------
+Setup
+-----
+
+    $ git clone http://github.com/theosp/bupler-lib.git
+    $ cd bupler-lib
+    $ ./setup.sh
+
+Obtaining Bupler's Documentation
+--------------------------------
+
 Bupler uses [Sphinx][SphinxHP] for its documentation.
 
 Raw documentation files available under: docs/source (.rst files)
