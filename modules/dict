@@ -2,8 +2,8 @@
 
 dict.Dict ()
 {
-    name="$1"
-    dict_array="bupler_dict_${name//./_d_}"
+    local name="$1"
+    local dict_array="bupler_dict_${name//./_d_}"
 
     shift
 
