@@ -1,0 +1,109 @@
+#!/bin/bash
+
+style.doc ()
+{
+    cat <<EOF
+Bupler module for output styling
+EOF
+}
+
+style.bold.doc ()
+{
+    cat <<EOF
+style.bold()
+
+Set bold output
+
+Stdout
+------
+
+The bold escape string
+
+Exit Status
+-----------
+
+0 - always
+EOF
+}
+
+style.bold ()
+{
+    tput bold
+    return 0
+}
+
+style.fcolor.doc ()
+{
+    cat <<EOF
+style.fcolor(color_id)
+
+Set foreground color_id output
+
+Stdout
+------
+
+The foreground color escape string
+
+Exit Status
+-----------
+
+0 - always
+EOF
+}
+
+style.fcolor ()
+{
+    tput setaf "$1"
+    return 0
+}
+
+style.bcolor.doc ()
+{
+    cat <<EOF
+style.bcolor(color_id)
+
+Set background color_id output
+
+Stdout
+------
+
+The background color escape string
+
+Exit Status
+-----------
+
+0 - always
+EOF
+}
+
+style.bcolor ()
+{
+    tput setab "$1"
+    return 0
+}
+
+style.reset.doc ()
+{
+    cat <<EOF
+style.reset()
+
+reset all styles
+
+Stdout
+------
+
+The reset escape string
+
+Exit Status
+-----------
+
+0 - always
+EOF
+}
+
+style.reset ()
+{
+    tput sgr0
+}
+
+# vim:ft=bash:
