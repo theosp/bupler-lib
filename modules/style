@@ -1,9 +1,13 @@
 #!/bin/bash
 
+# important: remember non-printed chars in $ps1 should be surrouned with \[ and \]
+
 style.doc ()
 {
     cat <<EOF
 Bupler module for output styling
+
+IMPORTANT: remember non-printed chars in $ps1 should be surrouned with \[ and \]
 EOF
 }
 
