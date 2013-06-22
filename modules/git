@@ -85,22 +85,7 @@ git.current_branch ()
         return 1
     fi
 
-    # The following was forked from:
-    # http://aaroncrane.co.uk/2009/03/git_branch_prompt/
-    head=$(< "$dot_git_path/HEAD")
-    if [[ $head == ref:\ refs/heads/* ]]; then
-        branch="${head#*/*/}"
-        echo "$branch"
-        return 0
-    elif [[ $head != '' ]]; then
-        branch='detached'
-        echo "$branch"
-        return 2
-    else
-        branch='unknown'
-        echo "$branch"
-        return 2
-    fi
+    git branch | grep '*' | sed -e 's/* //g'
 }
 
 git.status.doc ()
